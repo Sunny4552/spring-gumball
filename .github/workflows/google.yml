@@ -24,6 +24,7 @@ env:
   GKE_ZONE: us-central1-c   # TODO: update to cluster zone
   DEPLOYMENT_NAME: spring-gumball # TODO: update to deployment name
   IMAGE: spring-gumball
+  CRED: ${{ secrets.GCP_CREDENTIALS }}
 
 jobs:
   setup-build-publish-deploy:
@@ -52,7 +53,7 @@ jobs:
     - id: 'auth'
       uses: 'google-github-actions/auth@v0'
       with:
-        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+        credentials_json: '${{ env.CRED }}'
 
     - name: Docker configuration
       run: |-
